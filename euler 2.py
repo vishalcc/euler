@@ -1,0 +1,9 @@
+s=2
+a,b=1,2
+n=1
+while(b<=4000000):
+    a,b=b,a+b
+    if(b%2==0):
+        s+=b
+    n+=1
+print(s)

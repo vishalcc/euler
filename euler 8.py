@@ -1,0 +1,14 @@
+a,b,c,n=50,51,599,1
+while(n==1):
+    a+=1
+    b=a+1
+    c=1000-a-b
+    print(a,b,c)
+    while((a**2)+(b**2)<=c**2):
+        if((a**2)+(b**2)==c**2):
+            print(a,b,c)
+            n=0
+            break
+        else:
+            b+=1
+            c-=1
