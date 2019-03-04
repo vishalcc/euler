@@ -1,0 +1,51 @@
+class Node:
+    def __init__(self,name):
+        self.name=name
+        self.neig=[]
+        self.dist={}
+        self.d=0
+        self.burn=False
+    def addneig(self,n,d):
+        self.neig.append(n)
+        self.dist[n]=d
+class Graph:
+    head={}
+    def addname(self, n):
+        self.head[n]=Node(n)
+    def addneig(self,a,b,d):
+        self.head[a].addneig(b,d)
+        self.head[b].addneig(a, d)
+    min=9999999999
+    def DFS(self,name=1,dist=0,pre=99):
+        if(self.head[name].burn):
+            if(dist<self.min):
+                self.min=dist
+              #  print('Ans :',dist)
+        else:
+            self.head[name].d=dist
+            #print(name, ' : neigh and dist ',dist)
+            self.head[name].burn=True
+            for i in self.head[name].neig:
+                if( i!=pre):
+                    self.DFS(i,dist+self.head[name].dist[i],name)
+            self.head[name].d = 0
+            self.head[name].burn = False
+
+
+
+#arr=[[3,1,11],[6,1,12],[6,4,52],[6,2,17],[5,2,14],[4,5,13],[3,4,10]]
+#arr=[[3,1,5],[1,2,4],[3,2,3],[1,5,44]]
+arr,a1=[],[]
+for i in range(int(input())):
+    arr.append(list(map(int,input().split(' '))))
+    a1.append(arr[-1][0])
+    a1.append(arr[-1][1])
+a1=list(set(a1))
+g=Graph()
+for i in a1:
+    g.addname(i)
+
+for i in arr:
+    g.addneig(i[0],i[1],i[2])
+g.DFS(a1[0])
+print(g.min)
